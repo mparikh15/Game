@@ -2,8 +2,10 @@ from sys import exit
 
 #has_key = False
 
+name = "NULL"
+
 def large_chamber():
-    print "As you walk into the large chamber, the doors behind you lock... "
+    print "\nAs you walk into the large chamber, the doors behind you lock... "
     raw_input(" ")
     print "This is a large, mostly empty room and there are two doors"
     raw_input(" ")
@@ -16,12 +18,14 @@ def large_chamber():
     raw_input(" ")
     door_choice(False)
 
+
 def door_choice(key):
     holder = key
-    print "You return to the middle of the large chamber"
+    print "\nYou return to the middle of the large chamber"
     raw_input(" ")
-    print "What do you choose to do? "
+    print "What do you choose to do?"
     lcchoice = raw_input("> ")
+    lcchoice = lcchoice.upper()
 
     if "WEST" in lcchoice:
         spike_chamber()
@@ -29,7 +33,7 @@ def door_choice(key):
     elif "NORTH" in lcchoice and not key:
         print "You try to open the door, but it's locked!"
         raw_input(" ")
-        print "You look closer at the lock, and it has a winged hippocampus on it."
+        print "You look closer at the lock, and it has a winged horse monster on it."
         raw_input(" ")
         print "There must be a key somewhere in the dungeon..."
         raw_input(" ")
@@ -38,12 +42,16 @@ def door_choice(key):
     elif "NORTH" in lcchoice and key:
         gold_room()
 
+    elif "NAVI" in lcchoice:
+        print "Navi doesn't have any useful suggestions here."
+
     else:
         print "That's not really an option."
         door_choice(key)
 
+
 def spike_chamber():
-    print "You are in a room that is filled with spikes."
+    print "\nYou are in a room that is filled with spikes."
     raw_input(" ")
     print "Vague deja vu hits you, you've been here before."
     raw_input(" ")
@@ -56,59 +64,69 @@ def spike_chamber():
     print "There's a shiny object in the middle of the rusty spikes."
     spike_choice()
 
+
 def spike_choice():
-    print "Do you want to go towards the object?"
+    print "\nDo you want to go towards the object?"
     choice = raw_input("> ")
+    choice = choice.upper()
 
     if "YES" in choice or "Y" in choice:
         print "You walk forward through the spikes. Carefully..."
-        raw_input("> ")
+        raw_input(" ")
         print "You get to the middle of the spikes and look down."
-        raw_input("> ")
+        raw_input(" ")
         print "There's a key. It's very large and heavy, but you pick it up."
-        raw_input("> ")
-        print "After looking at it,"
+        raw_input(" ")
+        print "After looking at it, you decide it's worth taking. You put it in your pocket."
 
         door_choice(True)
 
-    elif "No" in choice or "N" in choice:
+    elif "NO" in choice or "N" in choice:
         print "You decide not to go towards the object and head back to the previous room."
         door_choice()
 
     else:
-        print "Don't ignore the question, YES or NO??\n"
+        print "Don't ignore the question, %s YES or NO??\n" % name
         spike_choice()
 
 
 def spike_chamber_front():
-    print "You walk into a poorly lit room."
+    print "\nYou walk into a poorly lit room."
     raw_input(" ")
     print "You realize that there's a huge array of spikes in front of you."
     raw_input(" ")
     print "You look more closely and see something shiny in the middle..."
     raw_input(" ")
-    print "Unfortunately it's completely blocked off by spikes and there isn't"
-    print "Any good way of getting over to it. Maybe Navi can help?"
+    print "Unfortunately it's completely blocked off by spikes and there isn't\n"
+    print "any good way of getting over to it. Maybe Navi can help?"
+    raw_input(" ")
     spike_test()
 
 
 def spike_test():
-    print "What do you do?"
+    print "\nWhat do you do?"
     choice = raw_input("> ")
+    choice = choice.upper()
 
-    if "navi" in choice or "NAVI" in choice or "Navi" in choice:
+    if "NAVI" in choice:
         print "Navi flies over to take a closer look."
+        raw_input(" ")
         print "She reports back, 'It looks like a key of some sort."
+        raw_input(" ")
         print "It has a winged seamonster symbol on it."
+        raw_input(" ")
         print "Unfortunately it's blocked by all of those spikes...'"
+        raw_input(" ")
         print "Navi doesn't think you'll be able to reach it from this side of the room."
+        raw_input(" ")
+        print "She suggests you head BACK."
         spike_test()
 
     elif "BACK" in choice:
         print "You head back."
         first_room()
 
-    elif "SPIKE" in choice or "JUMP" in choice or "look" in choice:
+    elif "SPIKE" in choice or "JUMP" in choice or "LOOK" in choice:
         dead("That was a bad idea. You end up falling on a spike and dying.")
 
     else:
@@ -117,15 +135,17 @@ def spike_test():
 
 
 def gold_room():
-    print "You win!"
+    print "You win!.. for now."
     exit(0)
+
 
 def dead(why):
     print why
     exit(0)
 
+
 def dark_hallway():
-    print "You enter the door on the right and step into a large, dark hallway."
+    print "\nYou enter the door on the right and step into a large, dark hallway."
     raw_input(" ")
     print "You take a few steps forward and hear a voice."
     raw_input(" ")
@@ -133,16 +153,20 @@ def dark_hallway():
     raw_input(" ")
     print "Ahead of you you see a frail old man."
     raw_input(" ")
-    print "'To progress you must answer this riddle.'"
+    print "I've been waiting for you %s he cackles." % name
     raw_input(" ")
-    print "It is greater than God; it is more evil than the devil; the poor have it;"
-    print "the rich need it; and if you eat it, you will die. What is it?"
+    print "To progress you must answer this riddle:"
+    raw_input(" ")
+    print "'It is greater than God; it is more evil than the devil; the poor have it;"
+    print "the rich need it; and if you eat it, you will die. What is it?'"
     raw_input(" ")
     riddle_one()
 
+
 def riddle_one():
-    print "What do you want to do/guess?"
+    print "\nWhat do you want to do/guess?"
     guess = raw_input("> ")
+    guess = guess.upper()
 
     if "NOTHING" in guess:
         print "'Very good! Very good indeed. Says the old man."
@@ -185,31 +209,130 @@ def riddle_one():
 
 
 def long_hallway():
-    print "Super long hallway, go through all the way to the end..."
-    large_chamber()
+    print "\nYou step into a long hallway. You can tell that nobody has been in this room \n"
+    print "for years."
+    raw_input(" ")
+    print "It is well lit and the floor is made out of bricks and many are missing or loose."
+    raw_input(" ")
+    print "You step forward and notice a pile of BONES on the LEFT."
+    raw_input(" ")
+    print "On the RIGHT you see a PUDDLE of dark still water where a chunk of bricks are missing."
+    raw_input(" ")
+    print "You see something shiny in the middle of the puddle."
+    raw_input(" ")
+    print "At the end of the hallways is a DOOR that you can barely see.\n"
+    middle_path()
+
+
+def middle_path():
+    pole = False
+    small_key = False
+
+    while True:
+        print "\nWhat do you do?"
+        choice = raw_input("> ")
+        choice = choice.upper()
+
+        if "DOOR" in choice and not small_key:
+            print "You walk over towards the door at the far end of the hallway, but you realize"
+            print "as you get near that the door is shut tight and that there's a keyhole in the middle."
+            raw_input(" ")
+            print "You know you need to keep looking around..."
+            raw_input(" ")
+
+        elif "DOOR" in choice and small_key:
+            print "You open the door with the key. It's tough at first because of age, but the lock works fine."
+            raw_input(" ")
+            print "The door clicks open."
+            raw_input(" ")
+            print "You leave behind the pole because it's all but fallen apart at this point. You walk into the new room."
+            large_chamber()
+
+        elif "PUDDLE" in choice or "RIGHT" in choice and not pole:
+            print "You walk over to the puddle on the right, but realize that the water is really deep."
+            raw_input(" ")
+            print "There's no way you can reach it by yourself, but there seems to be a string tied around it."
+            raw_input(" ")
+            print "Maybe if you can find a something to use as a pole..."
+            raw_input(" ")
+
+        elif "PUDDLE" in choice or "RIGHT" in choice and pole:
+            print "You use the rod you found to dig up the shiny object."
+            raw_input(" ")
+            print "It's dark and far down, so it takes you a few tries, but you"
+            print "eventually pull up a small key on a string. This might open the door!"
+            raw_input(" ")
+            small_key = True
+
+        elif "BONES" in choice or "LEFT" in choice:
+            print "You walk over to the bones. It looks like he may have been a soldier once."
+            raw_input(" ")
+            print "That was many years ago though, clearly, and the armor and shield have all rusted compeltely."
+            raw_input(" ")
+            print "There's an old spear that looks usable though, do you want to take it? "
+            take = raw_input("> ")
+            take = take.upper()
+
+            if "YES" in take or "Y" in take:
+                print "You pick up the spear. As soon as you pick it up, the sharp metal part at the end crumbles."
+                raw_input(" ")
+                print "Not ideal, but at least you have a pole now."
+                pole = True
+            else:
+                print "You leave the spear there."
+
 
 
 def start():
+    global name
+    print "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
     print "Oww... You wake up in a dark room. Your head hurts and you can't remember how you got here."
     raw_input(" ")
     print "You hear a voice, it introduces itself..."
     raw_input(" ")
     print "'Hello old friend', it says. 'My name is Navi and I am here to help.'"
     raw_input(" ")
-    print "I'm small and can take a closer look at things you cannot reach."
-    raw_input(" ")
-    print "To call me, just TYPE NAVI."
-    raw_input(" ")
-    print "Here, try it, just to see if you can do it right!\n"
-    print "Make sure it's all caps!\n"
-    test()
+    print "It looks like you hurt your head, do you remember your name?"
+    choice = raw_input("> ")
+    choice = choice.upper()
 
+    if "YES" in choice or "Y" in choice:
+        print "'Okay great, you remember your name then, right? And it is:'\n"
+        name = raw_input("> ")
+        print "Okay, %s I'm glad your remeber your name." % (name)
+        return name and navi_talk()
+
+    elif "NO" in choice or "N" in choice:
+        print "'You don't remember anything huh? Well, your name is Zeke.'\n"
+        name = "Zeke"
+        return name and navi_talk()
+
+    else:
+        print "'You're incoherent, so I'm guessing you don't remember your name. It's Zeke.\n"
+        name = "Zeke"
+        return name and navi_talk()
+
+#name = start()
+
+def navi_talk():
+    print "Now that we have that sorted, just a reminder that I can be helpful to you."
+    raw_input(" ")
+    print "When you're in a place and don't know what to do, I may be able to help."
+    raw_input(" ")
+    print "I'm also small and can take a closer look at things you cannot reach."
+    raw_input(" ")
+    print "To call me, just type NAVI."
+    raw_input(" ")
+    print "Here %s try it, just to see if you can do it right!\n" % name
+    test()
 
 def test():
     choice = raw_input("> ")
 
-    if  "NAVI" in choice:
-        print "Good, glad we got that out of the way."
+    if "NAVI" in choice:
+        print "Good, glad we got that out of the way. Now, we should move."
+        raw_input(" ")
+        print "Not a good idea to stay here too long."
         raw_input(" ")
         starting_room()
 
@@ -218,23 +341,32 @@ def test():
         test()
 
 def starting_room():
-    print "You look around this room."
+    print "\nYou look around this room."
     raw_input(" ")
     print "There are two doors here, one to the left and one to the right."
     raw_input(" ")
     print "In between those two doors is a long wall with seemingly nothing there..."
     raw_input(" ")
-    print "Do you want to go through door 1 (left) or door 2 (right)?\n"
+    print "Do you want to go through the door on the left or the door on the right?\n"
 
-    door = int (raw_input("> "))
-    if door == 1:
+    door = raw_input("> ")
+    door = door.upper()
+
+    if "LEFT" in door:
         spike_chamber_front()
-    elif door == 2:
+
+    elif "RIGHT" in door:
+        dark_hallway()
+
+    else:
+        print "Navi rolls her eyes at your inability to decide. She picks a door for you."
+        raw_input(" ")
+        print "You end up going through the door on the RIGHT."
         dark_hallway()
 
 
 def first_room():
-    print "You are in the first room again. You notice that the large gap in the middle now has a door in the middle."
+    print "\nYou are in the first room again. You notice that the large gap in the middle now has a door in the middle."
     raw_input(" ")
     print "It strikes you as odd. The door wasn't there the first time you were in this room, but it's clearly there now."
     raw_input(" ")
@@ -242,8 +374,9 @@ def first_room():
     three_choices()
 
 def three_choices():
-    print "Which way do you want to go? LEFT, RIGHT or STRAIGHT."
+    print "\nWhich way do you want to go? LEFT, RIGHT or STRAIGHT."
     door = raw_input("> ")
+    door = door.upper()
 
     if "LEFT" in door:
         spike_chamber_front()
