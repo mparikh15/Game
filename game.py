@@ -5,14 +5,16 @@ from sys import exit
 name = "NULL"
 
 def large_chamber():
-    print "\nAs you walk into the large chamber, the doors behind you lock... "
+    print "\nAs you walk into the new chamber, the doors behind you lock... "
     raw_input(" ")
     print "This is a large, mostly empty room and there are two doors"
     raw_input(" ")
     print "You move to the middle of the room and look to the north and west"
     raw_input(" ")
     print "The door to the north has a large lock on it with an engraving of a"
-    print "a winged hippocampus."
+    print "a winged horse monster. You know that this is called the Hippocampus."
+    raw_input(" ")
+    print "You do not know why you know about the Hippocampus, you just do."
     raw_input(" ")
     print "The door to the west is a simple wooden door, but a foul stench lies behind it..."
     raw_input(" ")
@@ -135,8 +137,48 @@ def spike_test():
 
 
 def gold_room():
-    print "You win!.. for now."
-    exit(0)
+    print "You walk into a cavernous room with a foul smell."
+    raw_input(" ")
+    print "There are torches near the wall where you entered, but the way forward is dark."
+    raw_input(" ")
+    print "You hear a low grumbling noise coming from the darkness..."
+    raw_input(" ")
+
+    while True:
+        print "What do you want to do now?\n"
+        choice = raw_input("> ")
+        choice = choice.upper()
+
+        if "TORCH" in choice or "LIGHT" in choice:
+            print "You take a torch off the wall and walk forward into the darkness.\n"
+            darkness_w_torch()
+
+        elif "STRAIGHT" in choice or "WALK" in choice or "FORWARD" in choice:
+            print "You stumble around a bit, but find yourself lost. You head back towards the door and the TORCHES.\n"
+
+        elif "NAVI" in choice:
+            print "Well, we have a few options. We can WALK FORWARD into the darkness."
+            raw_input(" ")
+            print "We could also EXPLORE a bit."
+            raw_input(" ")
+            print "Whatever you end up doing, I think I'll stay here by the TORCHES where I can see.\n"
+            raw_input(" ")
+
+        elif "EXPLORE" in choice:
+            print "You look around for a bit, mostly sweeping the area by the TORCHES"
+            raw_input(" ")
+            print "But you don't have much luck. You find a penny in the corner, but it was"
+            print "face down, so you left it. No bad luck for %s!\n" % name
+            raw_input(" ")
+
+        else:
+            print "That's not really an option here."
+
+
+def darkness_w_torch():
+    print "You win.. for now!"
+    exit()
+
 
 
 def dead(why):
@@ -225,6 +267,7 @@ def long_hallway():
 
 
 def middle_path():
+    global pole
     pole = False
     small_key = False
 
@@ -256,12 +299,13 @@ def middle_path():
             print "Maybe if you can find a something to use as a pole..."
             raw_input(" ")
 
-        elif "PUDDLE" in choice or "RIGHT" in choice and pole:
-            print "You use the rod you found to dig up the shiny object."
+        elif "PUDDLE" in choice or "RIGHT" in choice or "WATER" in choice and pole:
+            print "You use the wooden part of the spear you found to dig up the shiny object."
             raw_input(" ")
             print "It's dark and far down, so it takes you a few tries, but you"
             print "eventually pull up a small key on a string. This might open the door!"
             raw_input(" ")
+            print "Unfortunately the spear has more or less fallen apart. Don't think it'll be useful anymore."
             small_key = True
 
         elif "BONES" in choice or "LEFT" in choice:
@@ -278,9 +322,12 @@ def middle_path():
                 raw_input(" ")
                 print "Not ideal, but at least you have a pole now."
                 pole = True
+
             else:
                 print "You leave the spear there."
 
+        else:
+            print "That's not an option ", name
 
 
 def start():
@@ -296,13 +343,13 @@ def start():
     choice = raw_input("> ")
     choice = choice.upper()
 
-    if "YES" in choice or "Y" in choice:
+    if "YES" in choice or choice == "Y":
         print "'Okay great, you remember your name then, right? And it is:'\n"
         name = raw_input("> ")
         print "Okay, %s I'm glad your remeber your name." % (name)
         return name and navi_talk()
 
-    elif "NO" in choice or "N" in choice:
+    elif "NO" in choice or choice == "N":
         print "'You don't remember anything huh? Well, your name is Zeke.'\n"
         name = "Zeke"
         return name and navi_talk()
@@ -328,6 +375,7 @@ def navi_talk():
 
 def test():
     choice = raw_input("> ")
+    choice = choice.upper()
 
     if "NAVI" in choice:
         print "Good, glad we got that out of the way. Now, we should move."
